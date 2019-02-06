@@ -1,0 +1,84 @@
+<br/>
+<div class="container">
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+      <form>
+        <div class="form-row">
+
+          <div class="col-md-4">
+            <input type="text" name="title" id="title" [(ngModel)]="newMeanstack.title" placeholder="Title" class="form-control">
+          </div>
+          <div class="col-md-7">
+            <input name="description" id="description" [(ngModel)]="newMeanstack.description" placeholder="Description"
+              class="form-control" id="description">
+          </div>
+          <div class="col-md-1">
+            <button type="submit" class="btn btn-primary" (click)="create()">Add</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-1"></div>
+  </div>
+
+  <br />
+
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+
+      <div class="meanstacks" *ngIf="meanstacksList">
+        <table class="table table-striped table-dark">
+          <thead class="h">
+            <tr class="h">
+              <th class="h">Title</th>
+              <th class="h">Description</th>
+              <th class="h">Date</th>
+              <th class="h">Status</th>
+              <th class="h">Options</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="meanstack" (dblclick)="editMeanstack(meanstack)" *ngFor="let meanstack of meanstacksList">
+
+              <ng-container *ngIf="!editMeanstacks.includes(meanstack); else editTD">
+                <td>{{meanstack.title}}</td>
+                <td>{{meanstack.description}}</td>
+                <td>{{meanstack.date | date}}</td>
+                <td>{{meanstack.status}}</td>
+              </ng-container>
+
+              <ng-template #editTD>
+                <td><input type="text" name="title" id="title" (keypress)="submitMeanstack($event, meanstack)" [(ngModel)]="meanstack.title"
+                    placeholder="Title" class="form-control"></td>
+                <td><input type="text" name="description" id="description" (keypress)="submitMeanstack($event, meanstack)"
+                    [(ngModel)]="meanstack.description" placeholder="Description" class="form-control"></td>
+                <td>{{meanstack.date | date}}</td>
+                <td>
+                  <input type="text" name="status" id="status" (keypress)="submitMeanstack($event, meanstack)" [(ngModel)]="meanstack.status"
+                    placeholder="Status" class="form-control">
+                </td>
+              </ng-template>
+
+              <td class="o">
+                <button class="btn btn-success" (click)="doneMeanstack(meanstack)">
+                  <i class="fa fa-check"></i>
+                </button>
+                <button class="btn btn-primary" (click)="editMeanstack(meanstack)">
+                  <i class="fa fa-pencil"></i>
+                </button>
+                <button class="btn btn-danger" (click)="deleteMeanstack(meanstack)">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </td>
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="col-md-1"></div>
+
+  </div>
+</div>
