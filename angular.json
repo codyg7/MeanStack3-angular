@@ -136,5 +136,8 @@
       }
     }
   },
-  "defaultProject": "MeanStack3-angular"
+  "defaultProject": "MeanStack3-angular",
+  "cli": {
+    "analytics": "4eb86ecb-1051-4efc-bff6-cb46fd2d2ebc"
+  }
 }
